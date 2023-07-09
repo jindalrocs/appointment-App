@@ -13,4 +13,16 @@ document.getElementById('loginForm').addEventListener('submit', function() {
    
        // Save the name in localStorage.
        localStorage.setItem('emailid', emailid);
+       //similarly can be done to other fields
   });
+
+//storing object in right format
+
+let myObject = {
+  name : "Harsh",
+  email : "harsh@gmail.com"
+}
+//localStorage.setItem("myObject", JSON.stringify(myObject))
+//console.log(localStorage);
+let myobj_deserialized = JSON.parse(localStorage.getItem("myObject"));
+console.log(myobj_deserialized);
