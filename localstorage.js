@@ -1,3 +1,4 @@
+/*
 document.getElementById('loginForm').addEventListener('submit', function() {
     // Get the value of the name field.
     var name = document.getElementById('username').value;
@@ -15,14 +16,29 @@ document.getElementById('loginForm').addEventListener('submit', function() {
        localStorage.setItem('emailid', emailid);
        //similarly can be done to other fields
   });
-
+*/
 //storing object in right format
+document.getElementById('loginForm').addEventListener('submit', function(loginForm) {
 
 let myObject = {
-  name : "Harsh",
-  email : "harsh@gmail.com"
+  name : username.value,
+  email : email.value
 }
-//localStorage.setItem("myObject", JSON.stringify(myObject))
+localStorage.setItem(myObject.email, JSON.stringify(myObject))
 //console.log(localStorage);
-let myobj_deserialized = JSON.parse(localStorage.getItem("myObject"));
-console.log(myobj_deserialized);
+//let myobj_deserialized = JSON.parse(localStorage.getItem("myObject"));
+//console.log(myobj_deserialized);
+showuser(myObject);
+});
+function showuser(myObject)
+{
+  var listitem = document.getElementById('lists');
+  var litag = document.createElement('li');
+  litag.textContent = myObject.name + '-' + myObject.email;
+  listitem.appendChild(litag);
+
+
+}
+
+
+
