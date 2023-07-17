@@ -18,9 +18,13 @@ document.getElementById('loginForm').addEventListener('submit', function() {
   });
 */
 //storing object in right format
-document.getElementById('loginForm').addEventListener('submit', function(loginForm) {
+let loginform = document.getElementById('loginForm')
+var listitem = document.getElementById('lists');
+listitem.addEventListener('click', removeItem);
+//listitem.addEventListener('click', editItem);
+loginform.addEventListener('submit', function(loginForm) {
 
-let myObject = {
+const myObject = {
   name : username.value,
   email : email.value
 }
@@ -29,6 +33,9 @@ localStorage.setItem(myObject.email, JSON.stringify(myObject))
 //let myobj_deserialized = JSON.parse(localStorage.getItem("myObject"));
 //console.log(myobj_deserialized);
 showuser(myObject);
+
+
+
  }
 );
 function showuser(myObject)
@@ -39,6 +46,8 @@ function showuser(myObject)
   var deleteBtn = document.createElement('button');
   deleteBtn.className = 'delete';
  
+  var editBtn = document.createElement('button');
+  editBtn.className = 'edit';
  
   // Add classes to del button
  
@@ -47,16 +56,36 @@ function showuser(myObject)
  
  
   deleteBtn.appendChild(document.createTextNode('Delete'));
+  
+  editBtn.appendChild(document.createTextNode('Edit'));
   listitem.appendChild(litag);
   litag.appendChild(deleteBtn);
+  litag.appendChild(editBtn);
 
   // Remove item
+
+  editBtn.onclick = (e) =>{
+    if(e.target.classList.contains('edit')){
+      if(confirm('Are You Sure?')){
+        var li = e.target.parentElement;
+        console.log(li.parentElement);
+      
+        var editedname = document.getElementById('username');
+        var editmail = document.getElementById('email');
+        editedname.value = myObject.name;
+        editmail.value = myObject.email;
+
+        listitem.removeChild(li);
+        console.log(editedname.value);
+        localStorage.removeItem(email.value);
+       
+      }
+    }
+  }
  
   
 
 }
-var listitem = document.getElementById('lists');
-listitem.addEventListener('click', removeItem);
 
 
 
@@ -70,3 +99,7 @@ function removeItem(e){
     }
   }
 }
+
+
+
+
