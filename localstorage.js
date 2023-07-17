@@ -29,16 +29,44 @@ localStorage.setItem(myObject.email, JSON.stringify(myObject))
 //let myobj_deserialized = JSON.parse(localStorage.getItem("myObject"));
 //console.log(myobj_deserialized);
 showuser(myObject);
-});
+ }
+);
 function showuser(myObject)
 {
   var listitem = document.getElementById('lists');
   var litag = document.createElement('li');
   litag.textContent = myObject.name + '-' + myObject.email;
+  var deleteBtn = document.createElement('button');
+  deleteBtn.className = 'delete';
+ 
+ 
+  // Add classes to del button
+ 
+  //adding class of edit button
+ // editBtn.className = 'float-lg-right';
+ 
+ 
+  deleteBtn.appendChild(document.createTextNode('Delete'));
   listitem.appendChild(litag);
+  litag.appendChild(deleteBtn);
 
+  // Remove item
+ 
+  
 
 }
+var listitem = document.getElementById('lists');
+listitem.addEventListener('click', removeItem);
 
 
 
+
+function removeItem(e){
+  if(e.target.classList.contains('delete')){
+    if(confirm('Are You Sure?')){
+      var li = e.target.parentElement;
+      listitem.removeChild(li);
+      localStorage.removeItem(email.value);
+    }
+  }
+}
